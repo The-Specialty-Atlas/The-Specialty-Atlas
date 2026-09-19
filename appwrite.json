@@ -1,0 +1,19 @@
+{
+  "projectId": "",
+  "projectName": "specialty-atlas",
+  "functions": [
+    {
+      "$id": "pulse",
+      "name": "pulse",
+      "runtime": "node-18.0",
+      "execute": ["any"],
+      "path": "functions/pulse",
+      "entrypoint": "index.js",
+      "timeout": 15,
+      "variables": [
+        { "key": "DATABASE_ID", "value": "" },
+        { "key": "COLLECTION_ID", "value": "" }
+      ]
+    }
+  ]
+}
