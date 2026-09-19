@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Specialty Atlas — 238 fellowships catalogued</title>
+<meta name="description" content="Every medical fellowship and subspecialty, searchable and sortable: AI risk, competitiveness, best country, inherited fit score.">
+<meta property="og:title" content="The Specialty Atlas — 238 fellowships catalogued">
+<meta property="og:description" content="Every medical fellowship and subspecialty, searchable and sortable: AI risk, competitiveness, best country, inherited fit score.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 56 C10 40 4 26 10 16 C16 6 28 8 32 16 C36 8 48 6 54 16 C60 26 54 40 32 56Z' fill='%23e6392e'/%3E%3Cpath d='M8 34h13l3-7 5 14 4-10 3 3h20' stroke='white' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   THE SPECIALTY ATLAS — design system
+   Identity: clinical field-atlas. Warm paper, ink, arterial red, teal.
+   Type: Fraunces (display) · Instrument Sans (body) · JetBrains Mono (data)
+   ========================================================================== */
+
+:root{
+  --paper:#f6f3ec;
+  --paper-2:#efe9dd;
+  --card:#fffdf8;
+  --ink:#14181f;
+  --ink-2:#3c4451;
+  --mut:#6d675c;
+  --line:#d9d2c3;
+  --line-2:#e7e1d3;
+  --red:#e6392e;
+  --red-deep:#b3241c;
+  --teal:#0f8b8d;
+  --teal-deep:#0b6b6d;
+  --amber:#d98e04;
+  --night:#0d1219;
+  --night-2:#111823;
+  --night-line:#232d3b;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",ui-sans-serif,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --rad:14px;
+  --shadow:0 1px 2px rgba(20,24,31,.05),0 8px 24px -18px rgba(20,24,31,.35);
+  --shadow-lift:0 2px 4px rgba(20,24,31,.06),0 18px 40px -20px rgba(20,24,31,.38);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--paper);
+  line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--red);color:#fff}
+a{color:var(--red-deep)}
+img,svg{max-width:100%}
+button{font:inherit;cursor:pointer}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+.narrow{max-width:880px}
+
+/* ---------- reading progress ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--red);z-index:120;transition:width .1s linear}
+
+/* ---------- top nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(246,243,236,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:1160px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand svg{width:34px;height:30px;flex:none}
+.brand .word{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.01em;line-height:1}
+.brand .word em{font-style:italic;color:var(--red)}
+.brand .tag{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--mut);text-transform:uppercase;margin-top:2px}
+.nav-links{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav-links a{
+  text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:500;
+  padding:7px 11px;border-radius:999px;transition:background .18s,color .18s;
+  position:relative;
+}
+.nav-links a:hover{background:var(--paper-2);color:var(--ink)}
+.nav-links a.on{color:var(--red-deep);font-weight:700}
+.nav-links a.on::after{content:"";position:absolute;left:11px;right:11px;bottom:2px;height:2px;background:var(--red);border-radius:2px}
+.nav-burger{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:16px;color:var(--ink)}
+@media(max-width:860px){
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;
+    background:var(--paper);border-bottom:1px solid var(--line);padding:10px 22px 16px;gap:4px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:10px 12px;border-radius:10px}
+  .nav-burger{display:block}
+}
+
+/* ---------- hero ---------- */
+.hero{background:var(--night);color:#eef1f5;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);
+  background-size:26px 26px;pointer-events:none;
+}
+.hero::after{
+  content:"";position:absolute;top:-140px;right:-120px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(230,57,46,.22),transparent 65%);pointer-events:none;
+}
+.hero-in{position:relative;max-width:1160px;margin:0 auto;padding:84px 22px 0}
+.kicker{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);display:inline-flex;align-items:center;gap:10px;font-weight:600;
+}
+.kicker::before{content:"";width:26px;height:1.5px;background:var(--red);display:inline-block}
+.hero .kicker{color:#ff6b61}
+.hero .kicker::before{background:#ff6b61}
+.hero h1{
+  font-family:var(--serif);font-weight:640;font-size:clamp(44px,7.2vw,86px);
+  line-height:1.02;letter-spacing:-.025em;margin:20px 0 0;max-width:18ch;
+  font-variation-settings:"opsz" 144;
+}
+.hero h1 em{font-style:italic;color:#ff6b61;font-weight:560}
+.hero .sub{margin:26px 0 0;max-width:64ch;color:#b8c1cd;font-size:clamp(15.5px,1.6vw,18.5px);line-height:1.65}
+.hero .sub b{color:#fff;font-weight:600}
+.hero-cta{display:flex;gap:14px;margin:34px 0 0;flex-wrap:wrap}
+.live{
+  display:inline-flex;align-items:center;gap:8px;margin-top:34px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:#8b96a5;text-transform:uppercase;
+}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(230,57,46,.6)}50%{box-shadow:0 0 0 7px rgba(230,57,46,0)}}
+
+/* EKG strip */
+.ekg{position:relative;margin-top:52px;height:120px;border-top:1px solid var(--night-line)}
+.ekg svg{width:100%;height:120px;display:block}
+.ekg .base{stroke:rgba(255,107,97,.22);stroke-width:2;fill:none}
+.ekg .beam{
+  stroke:#ff5148;stroke-width:2.5;fill:none;stroke-linecap:round;
+  stroke-dasharray:170 2230;animation:sweep 4.6s linear infinite;
+  filter:drop-shadow(0 0 7px rgba(255,81,72,.9));
+}
+@keyframes sweep{from{stroke-dashoffset:2400}to{stroke-dashoffset:0}}
+.scroll-hint{
+  position:absolute;right:26px;bottom:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;color:#67717f;text-transform:uppercase;animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--red);color:#fff;overflow:hidden;border-block:1px solid var(--red-deep)}
+.ticker-track{display:flex;width:max-content;animation:tick 36s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker span{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:11px 0 11px 34px;white-space:nowrap;display:flex;align-items:center;gap:34px;
+}
+.ticker b{font-weight:700}
+.ticker .hh{font-size:10px;opacity:.85}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- stat band ---------- */
+.stats{background:var(--night);color:#fff;padding:54px 0;border-bottom:1px solid var(--night-line)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:30px}
+.stat .n{font-family:var(--serif);font-size:clamp(40px,4.6vw,58px);font-weight:600;letter-spacing:-.02em;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.stat .n b{color:#ff6b61;font-weight:640}
+.stat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:#8b96a5;text-transform:uppercase;margin-top:9px}
+
+/* ---------- sections ---------- */
+.sec{padding:84px 0 30px}
+.sec.paper2{background:var(--paper-2);border-block:1px solid var(--line)}
+.sec.dark{background:var(--night);color:#eef1f5}
+.sec-head{margin-bottom:36px}
+.sec-head h2{
+  font-family:var(--serif);font-weight:620;font-size:clamp(28px,4vw,44px);
+  letter-spacing:-.02em;line-height:1.12;margin-top:14px;max-width:24ch;
+}
+.sec-head p.lead{margin-top:14px;color:var(--ink-2);max-width:72ch;font-size:16.5px}
+.sec-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.sec-num b{color:var(--red);font-weight:700}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;font-size:15px;
+  padding:13px 22px;border-radius:999px;border:1.5px solid transparent;transition:all .2s;
+}
+.btn .ar{transition:transform .2s;display:inline-block}
+.btn:hover .ar{transform:translateX(4px)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep);transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(230,57,46,.6)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-ghost-l{border-color:var(--night-line);color:#eef1f5}
+.btn-ghost-l:hover{border-color:#8b96a5;transform:translateY(-2px)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.9,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* ---------- verdict cards ---------- */
+.verdict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.vcard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:26px 24px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;
+}
+.vcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red)}
+.vcard.teal::before{background:var(--teal)}
+.vcard.amber::before{background:var(--amber)}
+.vcard.ink::before{background:var(--ink)}
+.vcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
+.vcard .vk{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.vcard h3{font-family:var(--serif);font-size:21px;font-weight:640;margin:9px 0 8px;letter-spacing:-.01em}
+.vcard p{font-size:14.5px;color:var(--ink-2)}
+.vcard p b{color:var(--ink)}
+
+/* ---------- top-10 ranks ---------- */
+.rank{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);
+  padding:22px 24px;margin-bottom:14px;display:grid;grid-template-columns:76px 1fr;gap:20px;
+  box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;
+}
+.rank:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.rank .no{
+  font-family:var(--serif);font-size:52px;font-weight:600;color:var(--red);line-height:1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+}
+.rank .no small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--mut);margin-top:5px;text-transform:uppercase}
+.rank h3{font-family:var(--serif);font-size:22px;font-weight:640;letter-spacing:-.01em;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.rank .fitlab{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red-deep);background:rgba(230,57,46,.09);padding:3px 9px;border-radius:999px;letter-spacing:.06em}
+.bar{height:7px;background:var(--line-2);border-radius:99px;margin:12px 0 4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--red),#ff7a45);transition:width 1.1s cubic-bezier(.22,.9,.3,1)}
+.rank .why{font-size:14.5px;color:var(--ink-2);margin-top:10px;display:none}
+.rank.open .why{display:block}
+.rank .more{background:none;border:none;color:var(--red-deep);font-weight:700;font-size:13px;padding:0;margin-top:8px;display:inline-flex;gap:6px;align-items:center}
+.rank .more::after{content:"↓";transition:transform .25s}
+.rank.open .more::after{transform:rotate(180deg)}
+@media(max-width:640px){.rank{grid-template-columns:52px 1fr}.rank .no{font-size:38px}}
+
+/* ---------- profile chart ---------- */
+.chart{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:var(--shadow);overflow:hidden}
+.chart-h{background:var(--night);color:#fff;padding:14px 22px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.chart-h b{font-family:var(--serif);font-size:17px;font-weight:640;letter-spacing:.01em}
+.chart-h span{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:#8b96a5;text-transform:uppercase}
+.chart table{width:100%;border-collapse:collapse}
+.chart td{padding:11px 22px;border-bottom:1px solid var(--line-2);font-size:14.5px;vertical-align:top}
+.chart td:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mut);text-transform:uppercase;width:210px;padding-top:14px}
+.chart tr:last-child td{border-bottom:none}
+.chart tr:hover td{background:var(--paper-2)}
+
+/* ---------- cards (specialty cards) ---------- */
+.scard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);
+  padding:24px;margin-bottom:16px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+}
+.scard::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--acc,var(--red))}
+.scard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.scard h3{font-family:var(--serif);font-size:23px;font-weight:640;letter-spacing:-.015em;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.scard .grp-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-weight:600}
+.scard .desc{margin:10px 0 16px;color:var(--ink-2);font-size:14.8px;max-width:90ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.chip{
+  font-family:var(--mono);font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;
+  border:1.5px solid;letter-spacing:.03em;background:#fff;white-space:nowrap;
+}
+.chip.c-fit{color:var(--red-deep);border-color:rgba(230,57,46,.5)}
+.chip.c-ai{color:var(--teal-deep);border-color:rgba(15,139,141,.5)}
+.chip.c-comp{color:#7c4a00;border-color:rgba(217,142,4,.55)}
+.kv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px 26px}
+.kv span{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);font-weight:700}
+.kv p{font-size:13.8px;margin-top:2px;color:var(--ink)}
+.kv .best{color:var(--teal-deep);font-weight:600}
+.scard details{margin-top:14px;border-top:1px dashed var(--line);padding-top:10px}
+.scard summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--red-deep);list-style:none;display:flex;gap:8px;align-items:center}
+.scard summary::before{content:"+";font-family:var(--mono);font-weight:700;font-size:15px}
+.scard details[open] summary::before{content:"–"}
+.scard details ul{margin:10px 0 4px 2px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:3px 18px;font-size:13.5px;color:var(--ink-2);list-style:none}
+.scard details li::before{content:"— ";color:var(--red)}
+.ai-note{margin-top:12px;background:rgba(15,139,141,.08);border-left:3px solid var(--teal);border-radius:0 9px 9px 0;padding:10px 14px;font-size:13.3px;color:#0d4a4b}
+.ai-note b{color:var(--teal-deep)}
+.note{margin-top:10px;background:rgba(217,142,4,.09);border-left:3px solid var(--amber);border-radius:0 9px 9px 0;padding:10px 14px;font-size:13.3px;color:#6b4a06}
+.note b{color:#8a5f00}
+
+/* ---------- toolbar / filters ---------- */
+.toolbar{
+  position:sticky;top:57px;z-index:60;background:rgba(246,243,236,.94);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:var(--rad);padding:12px 14px;display:flex;gap:10px;flex-wrap:wrap;
+  margin-bottom:26px;box-shadow:var(--shadow);
+}
+.toolbar input[type=search]{
+  flex:1;min-width:200px;padding:10px 16px;border:1.5px solid var(--line);border-radius:999px;
+  font:inherit;font-size:14px;background:#fff;color:var(--ink);outline:none;transition:border .2s;
+}
+.toolbar input[type=search]:focus{border-color:var(--red)}
+.toolbar select{padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;font:inherit;font-size:13.5px;background:#fff;color:var(--ink);outline:none}
+.toolbar select:focus{border-color:var(--red)}
+.count-lab{font-family:var(--mono);font-size:11.5px;color:var(--mut);align-self:center;letter-spacing:.05em}
+
+/* ---------- group headers ---------- */
+.grp-head{display:flex;align-items:baseline;gap:14px;margin:44px 0 16px;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.grp-head:first-of-type{margin-top:8px}
+.grp-head h3{font-family:var(--serif);font-size:26px;font-weight:640;letter-spacing:-.015em}
+.grp-head .gn{font-family:var(--mono);font-size:11px;color:var(--red);font-weight:700;letter-spacing:.14em}
+.grp-head .gc{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.1em}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--rad);box-shadow:var(--shadow);background:var(--card)}
+table.tbl{width:100%;border-collapse:collapse;font-size:13.6px;min-width:760px}
+.tbl th{
+  background:var(--night);color:#dfe5ec;text-align:left;padding:12px 14px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;position:sticky;top:0;font-weight:600;
+}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.tbl tbody tr{transition:background .15s}
+.tbl tbody tr:hover td{background:rgba(230,57,46,.045)}
+.tbl tbody tr:last-child td{border-bottom:none}
+.tbl .sub{display:block;font-size:11.5px;color:var(--mut);margin-top:1px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.tag{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:6px;white-space:nowrap;
+}
+.tag.t-free{background:rgba(15,139,141,.13);color:var(--teal-deep)}
+.tag.t-match{background:rgba(230,57,46,.12);color:var(--red-deep)}
+.tag.t-college{background:rgba(217,142,4,.14);color:#8a5f00}
+.tag.t-closed{background:rgba(20,24,31,.1);color:var(--ink-2)}
+.tag.t-rank{background:rgba(108,92,231,.13);color:#5348c7}
+
+/* ---------- callouts ---------- */
+.callout{border-radius:var(--rad);padding:20px 22px;margin:18px 0;font-size:14.5px;border:1px solid}
+.callout b:first-child{font-family:var(--serif);font-size:16px}
+.callout.warn{background:#fdf3e2;border-color:#ecd3a3;color:#5c4309}
+.callout.good{background:#e9f4f0;border-color:#bcded6;color:#0c4b42}
+.callout.info{background:#eef0f6;border-color:#ccd3e4;color:#2c3752}
+.callout.red{background:#fdecea;border-color:#f3c2bd;color:#7a1d16}
+
+/* ---------- route cards ---------- */
+.route{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:26px;margin-bottom:16px;
+  box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;
+}
+.route::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
+.route:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.route h3{font-family:var(--serif);font-size:22px;font-weight:640;letter-spacing:-.01em}
+.route .steps{margin:12px 0 0;font-size:14.3px;color:var(--ink-2)}
+.route .rmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-top:14px}
+.route .rmeta div{background:var(--paper-2);border-radius:10px;padding:10px 14px;font-size:13.3px}
+.route .rmeta span{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);display:block;font-weight:700;margin-bottom:2px}
+
+/* ---------- country cards ---------- */
+.cc{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:24px;
+  box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;height:100%;
+}
+.cc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
+.cc h3{font-family:var(--serif);font-size:21px;font-weight:640;display:flex;gap:9px;align-items:center;letter-spacing:-.01em}
+.cc .flag{font-size:26px}
+.cc .cv{margin-top:14px;display:grid;gap:9px}
+.cc .ci span{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.cc .ci p{font-size:13.4px;margin-top:1px;color:var(--ink)}
+.cc .verdict{margin-top:14px;background:var(--night);color:#e8ecf2;border-radius:10px;padding:11px 14px;font-size:13.3px}
+.cc .verdict b{color:#ff8d85}
+.cc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+
+/* ---------- AI page ---------- */
+.narr{border-left:3px solid var(--red);padding:6px 0 6px 26px;margin-bottom:44px}
+.narr h3{font-family:var(--serif);font-size:clamp(23px,3vw,31px);font-weight:640;letter-spacing:-.015em;line-height:1.15}
+.narr p{margin-top:12px;color:var(--ink-2);font-size:15.5px;max-width:78ch}
+.boom{
+  display:grid;grid-template-columns:86px 1fr;gap:20px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--rad);padding:24px;margin-bottom:14px;box-shadow:var(--shadow);
+  transition:transform .25s,box-shadow .25s;
+}
+.boom:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.boom .idx{
+  font-family:var(--serif);font-size:46px;font-weight:600;color:var(--teal);line-height:1;letter-spacing:-.03em;
+}
+.boom .idx small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;color:var(--mut);margin-top:5px;text-transform:uppercase}
+.boom h3{font-family:var(--serif);font-size:20.5px;font-weight:640;letter-spacing:-.01em}
+.boom p{font-size:14.2px;color:var(--ink-2);margin-top:7px}
+.boom .bm{font-family:var(--mono);font-size:11.3px;color:var(--teal-deep);margin-top:9px}
+@media(max-width:640px){.boom{grid-template-columns:56px 1fr}.boom .idx{font-size:32px}}
+.pos{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber);border-radius:var(--rad);
+  padding:22px 24px;margin-bottom:14px;box-shadow:var(--shadow);
+}
+.pos h3{font-family:var(--serif);font-size:19px;font-weight:640}
+.pos p{font-size:14.3px;color:var(--ink-2);margin-top:7px}
+
+/* ---------- method ---------- */
+.legend{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:20px 24px;margin-bottom:14px;box-shadow:var(--shadow)}
+.legend h3{font-family:var(--serif);font-size:18px;font-weight:640;margin-bottom:6px}
+.legend p{font-size:14px;color:var(--ink-2)}
+.wrow{display:grid;grid-template-columns:170px 1fr 60px;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-2);font-size:14px}
+.wrow:last-child{border:none}
+.wrow .wbar{height:9px;background:var(--line-2);border-radius:99px;overflow:hidden}
+.wrow .wbar i{display:block;height:100%;width:0;background:var(--ink);border-radius:99px;transition:width 1s ease}
+.wrow b{font-family:var(--mono);font-size:12.5px;text-align:right}
+.src{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line-2);font-size:13.8px}
+.src:last-child{border:none}
+.src b{flex:1;color:var(--ink)}
+.src span{color:var(--mut);font-family:var(--mono);font-size:11px;text-align:right;min-width:180px}
+
+/* ---------- explore grid ---------- */
+.xgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.xcard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:26px;text-decoration:none;
+  color:var(--ink);display:block;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+}
+.xcard::after{
+  content:"→";position:absolute;right:22px;top:22px;font-size:19px;color:var(--red);
+  transition:transform .25s;
+}
+.xcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift)}
+.xcard:hover::after{transform:translate(5px,-2px)}
+.xcard .xk{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:700}
+.xcard h3{font-family:var(--serif);font-size:22px;font-weight:640;margin:8px 0 7px;letter-spacing:-.01em}
+.xcard p{font-size:14px;color:var(--ink-2)}
+
+/* ---------- footer ---------- */
+footer{background:var(--night);color:#9aa4b2;margin-top:90px;position:relative;overflow:hidden}
+footer .ekg-mini{height:56px;border-bottom:1px solid var(--night-line)}
+footer .ekg-mini svg{width:100%;height:56px}
+.foot-in{max-width:1160px;margin:0 auto;padding:44px 22px 30px;display:grid;gap:26px;grid-template-columns:1.4fr 1fr 1fr}
+.foot-in h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:#5f6b7a;text-transform:uppercase;margin-bottom:12px}
+.foot-in a{color:#cfd6df;text-decoration:none;font-size:13.8px;display:block;padding:3px 0;transition:color .15s}
+.foot-in a:hover{color:#ff6b61}
+.foot-brand{font-family:var(--serif);font-size:22px;color:#fff;font-weight:640}
+.foot-brand em{color:#ff6b61;font-style:italic}
+.foot-in p{font-size:12.8px;line-height:1.65}
+.foot-bottom{border-top:1px solid var(--night-line);padding:16px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;max-width:1160px;margin:0 auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:#5f6b7a}
+#pulse-slot{display:flex;gap:10px;align-items:center;margin-top:8px}
+.pulse-btn{background:var(--night-2);border:1px solid var(--night-line);color:#cfd6df;border-radius:999px;padding:7px 16px;font-size:12.5px;font-family:var(--mono);transition:all .18s}
+.pulse-btn:hover{border-color:#ff6b61;color:#ff6b61;transform:translateY(-1px)}
+.pulse-thanks{font-size:12px;color:#8bd6b5;font-family:var(--mono);display:none}
+@media(max-width:820px){.foot-in{grid-template-columns:1fr}}
+
+/* ---------- 404 ---------- */
+.flatline{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 22px}
+.flatline h1{font-family:var(--serif);font-size:clamp(34px,6vw,60px);font-weight:640;margin:18px 0 10px;letter-spacing:-.02em}
+.flatline p{color:var(--ink-2);max-width:50ch}
+
+/* ---------- back to top ---------- */
+#top-btn{
+  position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;
+  background:var(--ink);color:#fff;font-size:19px;box-shadow:var(--shadow-lift);z-index:90;
+  opacity:0;pointer-events:none;transition:all .3s;
+}
+#top-btn.show{opacity:1;pointer-events:auto}
+#top-btn:hover{background:var(--red);transform:translateY(-3px)}
+
+/* ---------- misc ---------- */
+.dots-bg{background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px}
+.mt0{margin-top:0}.mb0{margin-bottom:0}
+.center{text-align:center}
+.small-note{font-size:12.5px;color:var(--mut)}
+.page-head{padding:64px 0 40px;background:var(--paper-2);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.page-head::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(20,24,31,.06) 1px,transparent 1px);background-size:24px 24px}
+.page-head .wrap{position:relative}
+.page-head h1{font-family:var(--serif);font-weight:620;font-size:clamp(32px,5vw,54px);letter-spacing:-.025em;margin-top:14px;max-width:22ch;line-height:1.08}
+.page-head p{margin-top:16px;color:var(--ink-2);max-width:76ch;font-size:16px}
+.breadcrumb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mut);text-transform:uppercase}
+.breadcrumb a{color:var(--mut);text-decoration:none}
+.breadcrumb a:hover{color:var(--red)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important;scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+}
+
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 64 64" width="34" height="30" aria-hidden="true"><path d="M32 56 C10 40 4 26 10 16 C16 6 28 8 32 16 C36 8 48 6 54 16 C60 26 54 40 32 56Z" fill="#e6392e"/><path d="M8 34h13l3-7 5 14 4-10 3 3h20" stroke="#f6f3ec" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span><span class="word">The Specialty <em>Atlas</em></span><span class="tag">Home base → the world</span></span>
+    </a>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false">☰</button>
+    <div class="nav-links"><a href="index.html" class="">Atlas</a><a href="specialties.html" class="">Specialties</a><a href="countries.html" class="">Countries</a><a href="routes.html" class="">Routes</a><a href="catalog.html" class="on">Catalog</a><a href="ai.html" class="">AI Era</a><a href="method.html" class="">Method</a></div>
+  </div>
+</nav>
+<div class="page-head">
+  <div class="wrap">
+    <span class="breadcrumb"><a href="index.html">Home</a> / Atlas</span>
+    <h1>Two hundred thirty-eight fellowships.</h1>
+    <p>Every recognised fellowship and subspecialty under the 50 core fields — with AI risk, US competitiveness, the best country for it, and an inherited fit score from its parent specialty. This is the long tail of a medical career: where the niches — and the abroad-friendly exits — live.</p>
+  </div>
+</div>
+<section class="sec">
+  <div class="wrap">
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Search 238 fellowships — try ‘stroke’, ‘TAVR’, ‘pediatric’…">
+      <select id="grp"><option value="">All groups</option><option value="Anesthesia subs">Anesthesia subs</option><option value="CT subs">CT subs</option><option value="Cross-cutting &amp; career tracks">Cross-cutting &amp; career tracks</option><option value="Derm subs">Derm subs</option><option value="EM subs">EM subs</option><option value="ENT subs">ENT subs</option><option value="FM subs">FM subs</option><option value="Genetics subs">Genetics subs</option><option value="IM subs">IM subs</option><option value="NSGY subs">NSGY subs</option><option value="Neuro subs">Neuro subs</option><option value="Nuclear medicine subs">Nuclear medicine subs</option><option value="OB/GYN subs">OB/GYN subs</option><option value="Ophtho subs">Ophtho subs</option><option value="Ortho subs">Ortho subs</option><option value="PM&amp;R subs">PM&amp;R subs</option><option value="Path subs">Path subs</option><option value="Peds subs">Peds subs</option><option value="Plastics subs">Plastics subs</option><option value="Preventive subs">Preventive subs</option><option value="Psych subs">Psych subs</option><option value="Radiology subs">Radiology subs</option><option value="Surgery subs">Surgery subs</option><option value="Urology subs">Urology subs</option></select>
+      <select id="sort">
+        <option value="">Sort: default</option>
+        <option value="fit">Fit score ↓</option>
+        <option value="ai">AI danger ↓</option>
+      </select>
+      <span class="count-lab" id="count-lab"></span>
+    </div>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Fellowship / subspecialty</th><th>Group</th><th>AI risk</th><th>Comp (US)</th><th>Best country</th><th>Fit</th></tr></thead>
+      <tbody><tr data-row data-group="Anesthesia subs" data-search="adult cardiothoracic anesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="3.5">
+<td><b>Adult Cardiothoracic Anesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="pediatric anesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="4">
+<td><b>Pediatric Anesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="neuroanesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="3.5">
+<td><b>Neuroanesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="obstetric anesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="3">
+<td><b>Obstetric Anesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>6</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="regional &amp; acute pain anesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="3.5">
+<td><b>Regional &amp; Acute Pain Anesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="anesthesia critical care anesthesiology anesthesia subs" data-fit="80.0" data-ai="5">
+<td><b>Anesthesia Critical Care</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>7</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="transplant anesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="3.5">
+<td><b>Transplant Anesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="thoracic anesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="3.5">
+<td><b>Thoracic Anesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="ambulatory anesthesiology anesthesiology anesthesia subs" data-fit="80.0" data-ai="4">
+<td><b>Ambulatory Anesthesiology</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>80.0</b></td>
+</tr><tr data-row data-group="Anesthesia subs" data-search="perioperative informatics &amp; ai anesthesiology anesthesia subs" data-fit="82.6" data-ai="5.5">
+<td><b>Perioperative Informatics &amp; AI</b><span class="sub">← Anesthesiology</span></td>
+<td>Anesthesia subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>82.6</b></td>
+</tr><tr data-row data-group="Derm subs" data-search="dermatopathology dermatology derm subs" data-fit="74.8" data-ai="5.5">
+<td><b>Dermatopathology</b><span class="sub">← Dermatology</span></td>
+<td>Derm subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>74.8</b></td>
+</tr><tr data-row data-group="Derm subs" data-search="mohs micrographic surgery &amp; derm-oncology dermatology derm subs" data-fit="74.8" data-ai="3">
+<td><b>Mohs Micrographic Surgery &amp; Derm-Oncology</b><span class="sub">← Dermatology</span></td>
+<td>Derm subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>74.8</b></td>
+</tr><tr data-row data-group="Derm subs" data-search="pediatric dermatology dermatology derm subs" data-fit="74.8" data-ai="4.5">
+<td><b>Pediatric Dermatology</b><span class="sub">← Dermatology</span></td>
+<td>Derm subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>74.8</b></td>
+</tr><tr data-row data-group="Derm subs" data-search="procedural &amp; cosmetic dermatology dermatology derm subs" data-fit="75.8" data-ai="3.5">
+<td><b>Procedural &amp; Cosmetic Dermatology</b><span class="sub">← Dermatology</span></td>
+<td>Derm subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>UAE</td>
+<td><b>75.8</b></td>
+</tr><tr data-row data-group="Derm subs" data-search="immunodermatology dermatology derm subs" data-fit="74.8" data-ai="4.5">
+<td><b>Immunodermatology</b><span class="sub">← Dermatology</span></td>
+<td>Derm subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>74.8</b></td>
+</tr><tr data-row data-group="Derm subs" data-search="teledermatology &amp; ai screening dermatology derm subs" data-fit="77.4" data-ai="5">
+<td><b>Teledermatology &amp; AI Screening</b><span class="sub">← Dermatology</span></td>
+<td>Derm subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>UAE</td>
+<td><b>77.4</b></td>
+</tr><tr data-row data-group="EM subs" data-search="emergency medical services (ems) emergency medicine em subs" data-fit="76.4" data-ai="4">
+<td><b>Emergency Medical Services (EMS)</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="EM subs" data-search="medical toxicology emergency medicine em subs" data-fit="76.4" data-ai="4">
+<td><b>Medical Toxicology</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="EM subs" data-search="point-of-care ultrasound emergency medicine em subs" data-fit="76.4" data-ai="3">
+<td><b>Point-of-Care Ultrasound</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>6</td>
+<td>US</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="EM subs" data-search="global &amp; humanitarian em emergency medicine em subs" data-fit="76.4" data-ai="4">
+<td><b>Global &amp; Humanitarian EM</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>UK</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="EM subs" data-search="wilderness medicine emergency medicine em subs" data-fit="76.4" data-ai="3.5">
+<td><b>Wilderness Medicine</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>5</td>
+<td>US</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="EM subs" data-search="observation medicine emergency medicine em subs" data-fit="76.4" data-ai="5">
+<td><b>Observation Medicine</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5</td>
+<td>US</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="EM subs" data-search="ed operations &amp; informatics emergency medicine em subs" data-fit="77.2" data-ai="5.5">
+<td><b>ED Operations &amp; Informatics</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>5</td>
+<td>US</td>
+<td><b>77.2</b></td>
+</tr><tr data-row data-group="EM subs" data-search="pediatric emergency medicine emergency medicine em subs" data-fit="76.4" data-ai="4.5">
+<td><b>Pediatric Emergency Medicine</b><span class="sub">← Emergency Medicine</span></td>
+<td>EM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="FM subs" data-search="fm sports medicine family medicine fm subs" data-fit="72.8" data-ai="4">
+<td><b>FM Sports Medicine</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="fm obstetrics family medicine fm subs" data-fit="72.8" data-ai="4">
+<td><b>FM Obstetrics</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="women&#x27;s health (fm) family medicine fm subs" data-fit="72.8" data-ai="4">
+<td><b>Women&#x27;s Health (FM)</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="lifestyle medicine family medicine fm subs" data-fit="72.8" data-ai="5.5">
+<td><b>Lifestyle Medicine</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="obesity medicine family medicine fm subs" data-fit="72.8" data-ai="5.5">
+<td><b>Obesity Medicine</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="fm point-of-care ultrasound family medicine fm subs" data-fit="72.8" data-ai="3.5">
+<td><b>FM Point-of-Care Ultrasound</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="integrative &amp; functional medicine family medicine fm subs" data-fit="72.8" data-ai="5">
+<td><b>Integrative &amp; Functional Medicine</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="hiv medicine family medicine fm subs" data-fit="72.8" data-ai="4.5">
+<td><b>HIV Medicine</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="FM subs" data-search="rural &amp; remote medicine family medicine fm subs" data-fit="72.8" data-ai="4.5">
+<td><b>Rural &amp; Remote Medicine</b><span class="sub">← Family Medicine</span></td>
+<td>FM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>4.5</td>
+<td>CA</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="IM subs" data-search="clinical cardiac electrophysiology cardiology im subs" data-fit="82.5" data-ai="4">
+<td><b>Clinical Cardiac Electrophysiology</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>8</td>
+<td>US</td>
+<td><b>82.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="advanced heart failure &amp; transplant cardiology cardiology im subs" data-fit="81.5" data-ai="4">
+<td><b>Advanced Heart Failure &amp; Transplant Cardiology</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>81.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="structural heart disease (tavr/mitraclip/laa) cardiology im subs" data-fit="82.5" data-ai="4">
+<td><b>Structural Heart Disease (TAVR/MitraClip/LAA)</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>8</td>
+<td>US</td>
+<td><b>82.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="cardiac imaging (echo/cmr/ct) cardiology im subs" data-fit="81.5" data-ai="5.5">
+<td><b>Cardiac Imaging (Echo/CMR/CT)</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>81.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="interventional cardiology cardiology im subs" data-fit="82.5" data-ai="4">
+<td><b>Interventional Cardiology</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>8.5</td>
+<td>US</td>
+<td><b>82.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="adult congenital heart disease cardiology im subs" data-fit="81.5" data-ai="4.5">
+<td><b>Adult Congenital Heart Disease</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>81.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="cardio-oncology cardiology im subs" data-fit="81.5" data-ai="5">
+<td><b>Cardio-Oncology</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>81.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="digital cardiology &amp; remote monitoring cardiology im subs" data-fit="81.5" data-ai="5">
+<td><b>Digital Cardiology &amp; Remote Monitoring</b><span class="sub">← Cardiology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>81.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="transplant hepatology gastroenterology im subs" data-fit="76.7" data-ai="4">
+<td><b>Transplant Hepatology</b><span class="sub">← Gastroenterology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>76.7</b></td>
+</tr><tr data-row data-group="IM subs" data-search="advanced endoscopy (ercp/eus) gastroenterology im subs" data-fit="76.7" data-ai="4">
+<td><b>Advanced Endoscopy (ERCP/EUS)</b><span class="sub">← Gastroenterology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>76.7</b></td>
+</tr><tr data-row data-group="IM subs" data-search="inflammatory bowel disease gastroenterology im subs" data-fit="76.7" data-ai="5">
+<td><b>Inflammatory Bowel Disease</b><span class="sub">← Gastroenterology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>76.7</b></td>
+</tr><tr data-row data-group="IM subs" data-search="gi motility &amp; functional disease gastroenterology im subs" data-fit="76.7" data-ai="5">
+<td><b>GI Motility &amp; Functional Disease</b><span class="sub">← Gastroenterology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>76.7</b></td>
+</tr><tr data-row data-group="IM subs" data-search="bariatric endoscopy gastroenterology im subs" data-fit="76.7" data-ai="4.5">
+<td><b>Bariatric Endoscopy</b><span class="sub">← Gastroenterology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>76.7</b></td>
+</tr><tr data-row data-group="IM subs" data-search="interventional nephrology nephrology im subs" data-fit="70.3" data-ai="4">
+<td><b>Interventional Nephrology</b><span class="sub">← Nephrology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>70.3</b></td>
+</tr><tr data-row data-group="IM subs" data-search="onco-nephrology nephrology im subs" data-fit="70.3" data-ai="5">
+<td><b>Onco-Nephrology</b><span class="sub">← Nephrology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>70.3</b></td>
+</tr><tr data-row data-group="IM subs" data-search="interventional pulmonology pulmonary &amp; critical care medicine im subs" data-fit="76.7" data-ai="4">
+<td><b>Interventional Pulmonology</b><span class="sub">← Pulmonary &amp; Critical Care Medicine</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7</td>
+<td>US</td>
+<td><b>76.7</b></td>
+</tr><tr data-row data-group="IM subs" data-search="pulmonary hypertension pulmonary &amp; critical care medicine im subs" data-fit="75.9" data-ai="4.5">
+<td><b>Pulmonary Hypertension</b><span class="sub">← Pulmonary &amp; Critical Care Medicine</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>75.9</b></td>
+</tr><tr data-row data-group="IM subs" data-search="bmt &amp; cellular therapy (car-t) hematology-oncology im subs" data-fit="81.2" data-ai="4">
+<td><b>BMT &amp; Cellular Therapy (CAR-T)</b><span class="sub">← Hematology-Oncology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>81.2</b></td>
+</tr><tr data-row data-group="IM subs" data-search="hemostasis &amp; thrombosis hematology-oncology im subs" data-fit="81.2" data-ai="4.5">
+<td><b>Hemostasis &amp; Thrombosis</b><span class="sub">← Hematology-Oncology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>81.2</b></td>
+</tr><tr data-row data-group="IM subs" data-search="precision oncology &amp; tumor genomics hematology-oncology im subs" data-fit="82.9" data-ai="4.5">
+<td><b>Precision Oncology &amp; Tumor Genomics</b><span class="sub">← Hematology-Oncology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>82.9</b></td>
+</tr><tr data-row data-group="IM subs" data-search="hiv medicine (id) infectious disease im subs" data-fit="67.5" data-ai="4.5">
+<td><b>HIV Medicine (ID)</b><span class="sub">← Infectious Disease</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5</td>
+<td>US</td>
+<td><b>67.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="transplant &amp; immunocompromised-host id infectious disease im subs" data-fit="67.5" data-ai="4.5">
+<td><b>Transplant &amp; Immunocompromised-Host ID</b><span class="sub">← Infectious Disease</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>67.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="antimicrobial stewardship infectious disease im subs" data-fit="67.5" data-ai="4.5">
+<td><b>Antimicrobial Stewardship</b><span class="sub">← Infectious Disease</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5</td>
+<td>US</td>
+<td><b>67.5</b></td>
+</tr><tr data-row data-group="IM subs" data-search="diabetes technology (cgm/closed-loop) endocrinology im subs" data-fit="74.3" data-ai="5.5">
+<td><b>Diabetes Technology (CGM/Closed-Loop)</b><span class="sub">← Endocrinology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>74.3</b></td>
+</tr><tr data-row data-group="IM subs" data-search="thyroid nodule &amp; endocrine ultrasound endocrinology im subs" data-fit="71.8" data-ai="4">
+<td><b>Thyroid Nodule &amp; Endocrine Ultrasound</b><span class="sub">← Endocrinology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>71.8</b></td>
+</tr><tr data-row data-group="IM subs" data-search="musculoskeletal ultrasound (rheum) rheumatology im subs" data-fit="71.0" data-ai="4.5">
+<td><b>Musculoskeletal Ultrasound (Rheum)</b><span class="sub">← Rheumatology</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="IM subs" data-search="clinician-educator / medical education internal medicine (gateway) im subs" data-fit="73.2" data-ai="4">
+<td><b>Clinician-Educator / Medical Education</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="IM subs" data-search="clinician-scientist / md-phd track internal medicine (gateway) im subs" data-fit="73.2" data-ai="4.5">
+<td><b>Clinician-Scientist / MD-PhD Track</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>IM subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5</td>
+<td>US</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Genetics subs" data-search="molecular genetic pathology molecular genetic pathology &amp; genomic medicine genetics subs" data-fit="86.5" data-ai="4">
+<td><b>Molecular Genetic Pathology</b><span class="sub">← Molecular Genetic Pathology &amp; Genomic Medicine</span></td>
+<td>Genetics subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>86.5</b></td>
+</tr><tr data-row data-group="Genetics subs" data-search="medical biochemical genetics medical genetics &amp; genomics genetics subs" data-fit="82.9" data-ai="4.5">
+<td><b>Medical Biochemical Genetics</b><span class="sub">← Medical Genetics &amp; Genomics</span></td>
+<td>Genetics subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>82.9</b></td>
+</tr><tr data-row data-group="Genetics subs" data-search="laboratory genetics &amp; genomics medical genetics &amp; genomics genetics subs" data-fit="82.0" data-ai="4.5">
+<td><b>Laboratory Genetics &amp; Genomics</b><span class="sub">← Medical Genetics &amp; Genomics</span></td>
+<td>Genetics subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>82.0</b></td>
+</tr><tr data-row data-group="Genetics subs" data-search="cancer genetics &amp; hereditary syndromes medical genetics &amp; genomics genetics subs" data-fit="82.0" data-ai="4">
+<td><b>Cancer Genetics &amp; Hereditary Syndromes</b><span class="sub">← Medical Genetics &amp; Genomics</span></td>
+<td>Genetics subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>82.0</b></td>
+</tr><tr data-row data-group="Genetics subs" data-search="cardiovascular genetics medical genetics &amp; genomics genetics subs" data-fit="82.9" data-ai="4">
+<td><b>Cardiovascular Genetics</b><span class="sub">← Medical Genetics &amp; Genomics</span></td>
+<td>Genetics subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>82.9</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="vascular neurology neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>Vascular Neurology</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="clinical neurophysiology neurology neuro subs" data-fit="78.5" data-ai="5">
+<td><b>Clinical Neurophysiology</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="epilepsy &amp; seizure surgery programs neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>Epilepsy &amp; Seizure Surgery Programs</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="movement disorders (dbs) neurology neuro subs" data-fit="78.5" data-ai="4">
+<td><b>Movement Disorders (DBS)</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="ms / neuroimmunology neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>MS / Neuroimmunology</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="neuromuscular medicine &amp; emg neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>Neuromuscular Medicine &amp; EMG</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="behavioral neurology / dementia neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>Behavioral Neurology / Dementia</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="headache medicine neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>Headache Medicine</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="neuro-oncology neurology neuro subs" data-fit="78.5" data-ai="4">
+<td><b>Neuro-Oncology</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="autonomic disorders neurology neuro subs" data-fit="78.5" data-ai="4">
+<td><b>Autonomic Disorders</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="neurogenetics neurology neuro subs" data-fit="79.3" data-ai="4">
+<td><b>Neurogenetics</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>79.3</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="brain injury medicine neurology neuro subs" data-fit="78.5" data-ai="4">
+<td><b>Brain Injury Medicine</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="child neurology neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>Child Neurology</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="Neuro subs" data-search="neurodevelopmental disabilities neurology neuro subs" data-fit="78.5" data-ai="4.5">
+<td><b>Neurodevelopmental Disabilities</b><span class="sub">← Neurology</span></td>
+<td>Neuro subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>78.5</b></td>
+</tr><tr data-row data-group="NSGY subs" data-search="endovascular surgical neuroradiology (neuro-ir) neurosurgery nsgy subs" data-fit="70.2" data-ai="2.5">
+<td><b>Endovascular Surgical Neuroradiology (Neuro-IR)</b><span class="sub">← Neurosurgery</span></td>
+<td>NSGY subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>2.5</td>
+<td>8.5</td>
+<td>US</td>
+<td><b>70.2</b></td>
+</tr><tr data-row data-group="NSGY subs" data-search="skull base surgery neurosurgery nsgy subs" data-fit="67.0" data-ai="3">
+<td><b>Skull Base Surgery</b><span class="sub">← Neurosurgery</span></td>
+<td>NSGY subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>67.0</b></td>
+</tr><tr data-row data-group="NSGY subs" data-search="functional &amp; stereotactic neurosurgery (dbs) neurosurgery nsgy subs" data-fit="67.0" data-ai="3">
+<td><b>Functional &amp; Stereotactic Neurosurgery (DBS)</b><span class="sub">← Neurosurgery</span></td>
+<td>NSGY subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>67.0</b></td>
+</tr><tr data-row data-group="NSGY subs" data-search="pediatric neurosurgery neurosurgery nsgy subs" data-fit="67.0" data-ai="3">
+<td><b>Pediatric Neurosurgery</b><span class="sub">← Neurosurgery</span></td>
+<td>NSGY subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>67.0</b></td>
+</tr><tr data-row data-group="NSGY subs" data-search="neurosurgical spine surgery neurosurgery nsgy subs" data-fit="67.0" data-ai="3.5">
+<td><b>Neurosurgical Spine Surgery</b><span class="sub">← Neurosurgery</span></td>
+<td>NSGY subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>67.0</b></td>
+</tr><tr data-row data-group="NSGY subs" data-search="epilepsy surgery neurosurgery nsgy subs" data-fit="67.0" data-ai="3">
+<td><b>Epilepsy Surgery</b><span class="sub">← Neurosurgery</span></td>
+<td>NSGY subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7</td>
+<td>US</td>
+<td><b>67.0</b></td>
+</tr><tr data-row data-group="Nuclear medicine subs" data-search="theranostics (lu-177 psma/dotatate) nuclear medicine &amp; theranostics nuclear medicine subs" data-fit="83.2" data-ai="4">
+<td><b>Theranostics (Lu-177 PSMA/DOTATATE)</b><span class="sub">← Nuclear Medicine &amp; Theranostics</span></td>
+<td>Nuclear medicine subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>DE</td>
+<td><b>83.2</b></td>
+</tr><tr data-row data-group="Nuclear medicine subs" data-search="pet/ct &amp; molecular imaging nuclear medicine &amp; theranostics nuclear medicine subs" data-fit="81.4" data-ai="4.5">
+<td><b>PET/CT &amp; Molecular Imaging</b><span class="sub">← Nuclear Medicine &amp; Theranostics</span></td>
+<td>Nuclear medicine subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>81.4</b></td>
+</tr><tr data-row data-group="Nuclear medicine subs" data-search="nuclear cardiology nuclear medicine &amp; theranostics nuclear medicine subs" data-fit="81.4" data-ai="5">
+<td><b>Nuclear Cardiology</b><span class="sub">← Nuclear Medicine &amp; Theranostics</span></td>
+<td>Nuclear medicine subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>81.4</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="maternal-fetal medicine obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="4">
+<td><b>Maternal-Fetal Medicine</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="gynecologic oncology obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="4">
+<td><b>Gynecologic Oncology</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>8</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="reproductive endocrinology &amp; infertility (ivf) obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="4">
+<td><b>Reproductive Endocrinology &amp; Infertility (IVF)</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="female pelvic medicine &amp; reconstructive surgery obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="4">
+<td><b>Female Pelvic Medicine &amp; Reconstructive Surgery</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="minimally invasive gynecologic surgery (migs) obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="4">
+<td><b>Minimally Invasive Gynecologic Surgery (MIGS)</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="complex family planning obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="4">
+<td><b>Complex Family Planning</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="pediatric &amp; adolescent gynecology obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="4">
+<td><b>Pediatric &amp; Adolescent Gynecology</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="OB/GYN subs" data-search="menopause &amp; women&#x27;s health obstetrics &amp; gynecology ob/gyn subs" data-fit="69.8" data-ai="5">
+<td><b>Menopause &amp; Women&#x27;s Health</b><span class="sub">← Obstetrics &amp; Gynecology</span></td>
+<td>OB/GYN subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5</td>
+<td>US</td>
+<td><b>69.8</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="vitreoretinal surgery ophthalmology ophtho subs" data-fit="72.7" data-ai="3">
+<td><b>Vitreoretinal Surgery</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="glaucoma (incl. migs) ophthalmology ophtho subs" data-fit="72.7" data-ai="4">
+<td><b>Glaucoma (incl. MIGS)</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="cornea &amp; refractive surgery ophthalmology ophtho subs" data-fit="72.7" data-ai="3.5">
+<td><b>Cornea &amp; Refractive Surgery</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="oculoplastic &amp; orbital surgery ophthalmology ophtho subs" data-fit="72.7" data-ai="3">
+<td><b>Oculoplastic &amp; Orbital Surgery</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="pediatric ophthalmology &amp; strabismus ophthalmology ophtho subs" data-fit="72.7" data-ai="3.5">
+<td><b>Pediatric Ophthalmology &amp; Strabismus</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="uveitis ophthalmology ophtho subs" data-fit="72.7" data-ai="4">
+<td><b>Uveitis</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="neuro-ophthalmology ophthalmology ophtho subs" data-fit="72.7" data-ai="4.5">
+<td><b>Neuro-Ophthalmology</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="ocular oncology ophthalmology ophtho subs" data-fit="72.7" data-ai="3.5">
+<td><b>Ocular Oncology</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>72.7</b></td>
+</tr><tr data-row data-group="Ophtho subs" data-search="ai retinal screening (emerging) ophthalmology ophtho subs" data-fit="77.0" data-ai="5">
+<td><b>AI Retinal Screening (Emerging)</b><span class="sub">← Ophthalmology</span></td>
+<td>Ophtho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>UAE</td>
+<td><b>77.0</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="orthopedic sports medicine orthopedic surgery ortho subs" data-fit="72.2" data-ai="4">
+<td><b>Orthopedic Sports Medicine</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>8</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="adult reconstruction / arthroplasty (robotic) orthopedic surgery ortho subs" data-fit="73.9" data-ai="4">
+<td><b>Adult Reconstruction / Arthroplasty (Robotic)</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>8</td>
+<td>US</td>
+<td><b>73.9</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="orthopedic spine surgery orthopedic surgery ortho subs" data-fit="72.2" data-ai="4">
+<td><b>Orthopedic Spine Surgery</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>8</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="hand &amp; upper extremity surgery orthopedic surgery ortho subs" data-fit="72.2" data-ai="3.5">
+<td><b>Hand &amp; Upper Extremity Surgery</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>8</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="foot &amp; ankle surgery orthopedic surgery ortho subs" data-fit="72.2" data-ai="4">
+<td><b>Foot &amp; Ankle Surgery</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="orthopedic trauma orthopedic surgery ortho subs" data-fit="72.2" data-ai="4">
+<td><b>Orthopedic Trauma</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="pediatric orthopedics orthopedic surgery ortho subs" data-fit="72.2" data-ai="3.5">
+<td><b>Pediatric Orthopedics</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="musculoskeletal oncology orthopedic surgery ortho subs" data-fit="72.2" data-ai="3.5">
+<td><b>Musculoskeletal Oncology</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="orthopedic microsurgery / limb salvage orthopedic surgery ortho subs" data-fit="72.2" data-ai="3">
+<td><b>Orthopedic Microsurgery / Limb Salvage</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="Ortho subs" data-search="limb lengthening &amp; deformity correction orthopedic surgery ortho subs" data-fit="72.2" data-ai="4">
+<td><b>Limb Lengthening &amp; Deformity Correction</b><span class="sub">← Orthopedic Surgery</span></td>
+<td>Ortho subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>72.2</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="head &amp; neck oncology / microvascular recon otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3">
+<td><b>Head &amp; Neck Oncology / Microvascular Recon</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="neurotology &amp; lateral skull base otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3">
+<td><b>Neurotology &amp; Lateral Skull Base</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="rhinology &amp; anterior skull base otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3.5">
+<td><b>Rhinology &amp; Anterior Skull Base</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="laryngology &amp; voice disorders otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3.5">
+<td><b>Laryngology &amp; Voice Disorders</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="facial plastic &amp; reconstructive surgery otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3.5">
+<td><b>Facial Plastic &amp; Reconstructive Surgery</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="pediatric otolaryngology otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3.5">
+<td><b>Pediatric Otolaryngology</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="otology otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3">
+<td><b>Otology</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="ENT subs" data-search="thyroid &amp; parathyroid surgery otolaryngology (ent) ent subs" data-fit="71.0" data-ai="3.5">
+<td><b>Thyroid &amp; Parathyroid Surgery</b><span class="sub">← Otolaryngology (ENT)</span></td>
+<td>ENT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>71.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="cytopathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5.5">
+<td><b>Cytopathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="hematopathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5.5">
+<td><b>Hematopathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="neuropathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5">
+<td><b>Neuropathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="pediatric pathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5">
+<td><b>Pediatric Pathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="gi &amp; liver pathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5.5">
+<td><b>GI &amp; Liver Pathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="genitourinary pathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5.5">
+<td><b>Genitourinary Pathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="breast pathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5.5">
+<td><b>Breast Pathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="soft tissue &amp; bone pathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5.5">
+<td><b>Soft Tissue &amp; Bone Pathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="transfusion medicine / blood banking anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5">
+<td><b>Transfusion Medicine / Blood Banking</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="chemical pathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5">
+<td><b>Chemical Pathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="immunopathology anatomic &amp; clinical pathology path subs" data-fit="79.0" data-ai="5">
+<td><b>Immunopathology</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Path subs" data-search="digital &amp; computational pathology (ai) anatomic &amp; clinical pathology path subs" data-fit="81.5" data-ai="4.5">
+<td><b>Digital &amp; Computational Pathology (AI)</b><span class="sub">← Anatomic &amp; Clinical Pathology</span></td>
+<td>Path subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>81.5</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="neonatal-perinatal medicine pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Neonatal-Perinatal Medicine</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric cardiology pediatrics peds subs" data-fit="67.2" data-ai="4">
+<td><b>Pediatric Cardiology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric hematology-oncology pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Hematology-Oncology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric pulmonology pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Pulmonology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric gastroenterology pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Gastroenterology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric nephrology pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Nephrology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric infectious disease pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Infectious Disease</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric endocrinology pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Endocrinology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric rheumatology pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Rheumatology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric allergy &amp; immunology pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Allergy &amp; Immunology</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric critical care pediatrics peds subs" data-fit="67.2" data-ai="4.5">
+<td><b>Pediatric Critical Care</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric hospital medicine pediatrics peds subs" data-fit="67.2" data-ai="5">
+<td><b>Pediatric Hospital Medicine</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="developmental-behavioral pediatrics pediatrics peds subs" data-fit="67.2" data-ai="5">
+<td><b>Developmental-Behavioral Pediatrics</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="adolescent medicine pediatrics peds subs" data-fit="67.2" data-ai="5">
+<td><b>Adolescent Medicine</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="child abuse pediatrics pediatrics peds subs" data-fit="67.2" data-ai="4">
+<td><b>Child Abuse Pediatrics</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric hospice &amp; palliative pediatrics peds subs" data-fit="67.2" data-ai="3.5">
+<td><b>Pediatric Hospice &amp; Palliative</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric sleep medicine pediatrics peds subs" data-fit="67.2" data-ai="5">
+<td><b>Pediatric Sleep Medicine</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="pediatric rehabilitation medicine pediatrics peds subs" data-fit="67.2" data-ai="4">
+<td><b>Pediatric Rehabilitation Medicine</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="Peds subs" data-search="fetal medicine &amp; therapy pediatrics peds subs" data-fit="67.2" data-ai="4">
+<td><b>Fetal Medicine &amp; Therapy</b><span class="sub">← Pediatrics</span></td>
+<td>Peds subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>67.2</b></td>
+</tr><tr data-row data-group="PM&amp;R subs" data-search="spinal cord injury medicine physical medicine &amp; rehabilitation (pm&amp;r) pm&amp;r subs" data-fit="73.7" data-ai="4">
+<td><b>Spinal Cord Injury Medicine</b><span class="sub">← Physical Medicine &amp; Rehabilitation (PM&amp;R)</span></td>
+<td>PM&amp;R subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>73.7</b></td>
+</tr><tr data-row data-group="PM&amp;R subs" data-search="brain injury medicine (pm&amp;r) physical medicine &amp; rehabilitation (pm&amp;r) pm&amp;r subs" data-fit="73.7" data-ai="4">
+<td><b>Brain Injury Medicine (PM&amp;R)</b><span class="sub">← Physical Medicine &amp; Rehabilitation (PM&amp;R)</span></td>
+<td>PM&amp;R subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>73.7</b></td>
+</tr><tr data-row data-group="PM&amp;R subs" data-search="interventional spine &amp; msk (pm&amp;r) physical medicine &amp; rehabilitation (pm&amp;r) pm&amp;r subs" data-fit="73.7" data-ai="4">
+<td><b>Interventional Spine &amp; MSK (PM&amp;R)</b><span class="sub">← Physical Medicine &amp; Rehabilitation (PM&amp;R)</span></td>
+<td>PM&amp;R subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>73.7</b></td>
+</tr><tr data-row data-group="PM&amp;R subs" data-search="amputee &amp; prosthetic rehabilitation physical medicine &amp; rehabilitation (pm&amp;r) pm&amp;r subs" data-fit="73.7" data-ai="4">
+<td><b>Amputee &amp; Prosthetic Rehabilitation</b><span class="sub">← Physical Medicine &amp; Rehabilitation (PM&amp;R)</span></td>
+<td>PM&amp;R subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>73.7</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="craniofacial surgery plastic &amp; reconstructive surgery plastics subs" data-fit="66.9" data-ai="3">
+<td><b>Craniofacial Surgery</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>66.9</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="hand surgery (multi-parent) plastic &amp; reconstructive surgery plastics subs" data-fit="66.9" data-ai="3.5">
+<td><b>Hand Surgery (Multi-parent)</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>8</td>
+<td>US</td>
+<td><b>66.9</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="microsurgery / free flaps plastic &amp; reconstructive surgery plastics subs" data-fit="66.9" data-ai="3">
+<td><b>Microsurgery / Free Flaps</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>66.9</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="burn surgery plastic &amp; reconstructive surgery plastics subs" data-fit="66.9" data-ai="3">
+<td><b>Burn Surgery</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7</td>
+<td>US</td>
+<td><b>66.9</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="aesthetic / cosmetic surgery plastic &amp; reconstructive surgery plastics subs" data-fit="67.8" data-ai="3.5">
+<td><b>Aesthetic / Cosmetic Surgery</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>UAE</td>
+<td><b>67.8</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="breast reconstruction plastic &amp; reconstructive surgery plastics subs" data-fit="66.9" data-ai="3">
+<td><b>Breast Reconstruction</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7</td>
+<td>US</td>
+<td><b>66.9</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="gender-affirming surgery plastic &amp; reconstructive surgery plastics subs" data-fit="66.9" data-ai="3">
+<td><b>Gender-Affirming Surgery</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>66.9</b></td>
+</tr><tr data-row data-group="Plastics subs" data-search="peripheral nerve surgery plastic &amp; reconstructive surgery plastics subs" data-fit="66.9" data-ai="3">
+<td><b>Peripheral Nerve Surgery</b><span class="sub">← Plastic &amp; Reconstructive Surgery</span></td>
+<td>Plastics subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7</td>
+<td>US</td>
+<td><b>66.9</b></td>
+</tr><tr data-row data-group="Preventive subs" data-search="aerospace medicine public health &amp; preventive medicine preventive subs" data-fit="76.2" data-ai="4">
+<td><b>Aerospace Medicine</b><span class="sub">← Public Health &amp; Preventive Medicine</span></td>
+<td>Preventive subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>US</td>
+<td><b>76.2</b></td>
+</tr><tr data-row data-group="Preventive subs" data-search="general preventive medicine &amp; public health public health &amp; preventive medicine preventive subs" data-fit="76.2" data-ai="5">
+<td><b>General Preventive Medicine &amp; Public Health</b><span class="sub">← Public Health &amp; Preventive Medicine</span></td>
+<td>Preventive subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>76.2</b></td>
+</tr><tr data-row data-group="Preventive subs" data-search="undersea &amp; hyperbaric medicine public health &amp; preventive medicine preventive subs" data-fit="76.2" data-ai="3.5">
+<td><b>Undersea &amp; Hyperbaric Medicine</b><span class="sub">← Public Health &amp; Preventive Medicine</span></td>
+<td>Preventive subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>5</td>
+<td>US</td>
+<td><b>76.2</b></td>
+</tr><tr data-row data-group="Preventive subs" data-search="climate &amp; planetary health public health &amp; preventive medicine preventive subs" data-fit="75.4" data-ai="4">
+<td><b>Climate &amp; Planetary Health</b><span class="sub">← Public Health &amp; Preventive Medicine</span></td>
+<td>Preventive subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4.5</td>
+<td>Global</td>
+<td><b>75.4</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="child &amp; adolescent psychiatry psychiatry psych subs" data-fit="75.2" data-ai="4">
+<td><b>Child &amp; Adolescent Psychiatry</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>75.2</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="forensic psychiatry psychiatry psych subs" data-fit="75.2" data-ai="4">
+<td><b>Forensic Psychiatry</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>75.2</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="geriatric psychiatry psychiatry psych subs" data-fit="75.2" data-ai="4.5">
+<td><b>Geriatric Psychiatry</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>75.2</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="addiction psychiatry psychiatry psych subs" data-fit="75.2" data-ai="4.5">
+<td><b>Addiction Psychiatry</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>75.2</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="consultation-liaison (psychosomatic) psychiatry psychiatry psych subs" data-fit="75.2" data-ai="4">
+<td><b>Consultation-Liaison (Psychosomatic) Psychiatry</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>75.2</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="interventional psychiatry (tms/ketamine/ect) psychiatry psych subs" data-fit="78.1" data-ai="3.5">
+<td><b>Interventional Psychiatry (TMS/ketamine/ECT)</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>78.1</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="neuropsychiatry psychiatry psych subs" data-fit="75.2" data-ai="4">
+<td><b>Neuropsychiatry</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>75.2</b></td>
+</tr><tr data-row data-group="Psych subs" data-search="digital &amp; computational psychiatry psychiatry psych subs" data-fit="77.0" data-ai="5">
+<td><b>Digital &amp; Computational Psychiatry</b><span class="sub">← Psychiatry</span></td>
+<td>Psych subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>77.0</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="neuroradiology diagnostic radiology radiology subs" data-fit="82.3" data-ai="5.5">
+<td><b>Neuroradiology</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="musculoskeletal radiology diagnostic radiology radiology subs" data-fit="82.3" data-ai="6">
+<td><b>Musculoskeletal Radiology</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>6</td>
+<td>7</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="body (abdominal) imaging diagnostic radiology radiology subs" data-fit="82.3" data-ai="6">
+<td><b>Body (Abdominal) Imaging</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>6</td>
+<td>7</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="breast imaging diagnostic radiology radiology subs" data-fit="82.3" data-ai="6">
+<td><b>Breast Imaging</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>6</td>
+<td>7</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="cardiac imaging (radiology) diagnostic radiology radiology subs" data-fit="82.3" data-ai="5.5">
+<td><b>Cardiac Imaging (Radiology)</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>5.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="thoracic imaging diagnostic radiology radiology subs" data-fit="82.3" data-ai="6">
+<td><b>Thoracic Imaging</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>6</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="pediatric radiology diagnostic radiology radiology subs" data-fit="82.3" data-ai="5">
+<td><b>Pediatric Radiology</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="emergency radiology diagnostic radiology radiology subs" data-fit="82.3" data-ai="6">
+<td><b>Emergency Radiology</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>6</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="nuclear radiology diagnostic radiology radiology subs" data-fit="82.3" data-ai="5">
+<td><b>Nuclear Radiology</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="radiology informatics &amp; ai diagnostic radiology radiology subs" data-fit="84.0" data-ai="5">
+<td><b>Radiology Informatics &amp; AI</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>84.0</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="interventional oncology interventional radiology radiology subs" data-fit="83.8" data-ai="2.5">
+<td><b>Interventional Oncology</b><span class="sub">← Interventional Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>2.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>83.8</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="lymphatic interventions interventional radiology radiology subs" data-fit="84.6" data-ai="2.5">
+<td><b>Lymphatic Interventions</b><span class="sub">← Interventional Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>2.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>84.6</b></td>
+</tr><tr data-row data-group="Radiology subs" data-search="women&#x27;s imaging diagnostic radiology radiology subs" data-fit="82.3" data-ai="6">
+<td><b>Women&#x27;s Imaging</b><span class="sub">← Diagnostic Radiology</span></td>
+<td>Radiology subs</td>
+<td><span class="dot" style="background:#d98e04"></span>6</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>82.3</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="complex general surgical oncology general surgery surgery subs" data-fit="72.5" data-ai="3.5">
+<td><b>Complex General Surgical Oncology</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>8</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="colorectal surgery general surgery surgery subs" data-fit="72.5" data-ai="3.5">
+<td><b>Colorectal Surgery</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="hepatobiliary &amp; pancreatic surgery general surgery surgery subs" data-fit="72.5" data-ai="3.5">
+<td><b>Hepatobiliary &amp; Pancreatic Surgery</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="transplant surgery (asts) general surgery surgery subs" data-fit="72.5" data-ai="3.5">
+<td><b>Transplant Surgery (ASTS)</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="trauma &amp; surgical critical care general surgery surgery subs" data-fit="72.5" data-ai="4">
+<td><b>Trauma &amp; Surgical Critical Care</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="breast surgery general surgery surgery subs" data-fit="72.5" data-ai="3.5">
+<td><b>Breast Surgery</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="endocrine surgery general surgery surgery subs" data-fit="72.5" data-ai="3.5">
+<td><b>Endocrine Surgery</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="mis / bariatric surgery general surgery surgery subs" data-fit="74.2" data-ai="3.5">
+<td><b>MIS / Bariatric Surgery</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>74.2</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="acute care surgery general surgery surgery subs" data-fit="72.5" data-ai="4">
+<td><b>Acute Care Surgery</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="Surgery subs" data-search="hernia &amp; abdominal wall surgery general surgery surgery subs" data-fit="72.5" data-ai="3.5">
+<td><b>Hernia &amp; Abdominal Wall Surgery</b><span class="sub">← General Surgery</span></td>
+<td>Surgery subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>72.5</b></td>
+</tr><tr data-row data-group="CT subs" data-search="congenital cardiac surgery cardiothoracic surgery ct subs" data-fit="72.0" data-ai="3">
+<td><b>Congenital Cardiac Surgery</b><span class="sub">← Cardiothoracic Surgery</span></td>
+<td>CT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>8</td>
+<td>US</td>
+<td><b>72.0</b></td>
+</tr><tr data-row data-group="CT subs" data-search="adult cardiac surgery cardiothoracic surgery ct subs" data-fit="72.0" data-ai="3">
+<td><b>Adult Cardiac Surgery</b><span class="sub">← Cardiothoracic Surgery</span></td>
+<td>CT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.0</b></td>
+</tr><tr data-row data-group="CT subs" data-search="thoracic (lung/esophageal) surgery cardiothoracic surgery ct subs" data-fit="72.0" data-ai="3.5">
+<td><b>Thoracic (Lung/Esophageal) Surgery</b><span class="sub">← Cardiothoracic Surgery</span></td>
+<td>CT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.0</b></td>
+</tr><tr data-row data-group="CT subs" data-search="heart/lung transplant &amp; mcs (vad/ecmo) cardiothoracic surgery ct subs" data-fit="72.0" data-ai="3.5">
+<td><b>Heart/Lung Transplant &amp; MCS (VAD/ECMO)</b><span class="sub">← Cardiothoracic Surgery</span></td>
+<td>CT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.0</b></td>
+</tr><tr data-row data-group="CT subs" data-search="aortic surgery cardiothoracic surgery ct subs" data-fit="72.0" data-ai="3">
+<td><b>Aortic Surgery</b><span class="sub">← Cardiothoracic Surgery</span></td>
+<td>CT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>72.0</b></td>
+</tr><tr data-row data-group="CT subs" data-search="robotic cardiac surgery cardiothoracic surgery ct subs" data-fit="72.0" data-ai="3.5">
+<td><b>Robotic Cardiac Surgery</b><span class="sub">← Cardiothoracic Surgery</span></td>
+<td>CT subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>72.0</b></td>
+</tr><tr data-row data-group="Urology subs" data-search="urologic oncology urology urology subs" data-fit="77.9" data-ai="4">
+<td><b>Urologic Oncology</b><span class="sub">← Urology</span></td>
+<td>Urology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7.5</td>
+<td>US</td>
+<td><b>77.9</b></td>
+</tr><tr data-row data-group="Urology subs" data-search="endourology &amp; stone disease urology urology subs" data-fit="77.9" data-ai="4">
+<td><b>Endourology &amp; Stone Disease</b><span class="sub">← Urology</span></td>
+<td>Urology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7</td>
+<td>US</td>
+<td><b>77.9</b></td>
+</tr><tr data-row data-group="Urology subs" data-search="female pelvic medicine &amp; reconstructive urology urology urology subs" data-fit="77.9" data-ai="4">
+<td><b>Female Pelvic Medicine &amp; Reconstructive Urology</b><span class="sub">← Urology</span></td>
+<td>Urology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>77.9</b></td>
+</tr><tr data-row data-group="Urology subs" data-search="pediatric urology urology urology subs" data-fit="77.9" data-ai="3.5">
+<td><b>Pediatric Urology</b><span class="sub">← Urology</span></td>
+<td>Urology subs</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>7</td>
+<td>US</td>
+<td><b>77.9</b></td>
+</tr><tr data-row data-group="Urology subs" data-search="male infertility &amp; andrology urology urology subs" data-fit="77.9" data-ai="4">
+<td><b>Male Infertility &amp; Andrology</b><span class="sub">← Urology</span></td>
+<td>Urology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>77.9</b></td>
+</tr><tr data-row data-group="Urology subs" data-search="neurourology &amp; reconstruction urology urology subs" data-fit="77.9" data-ai="4">
+<td><b>Neurourology &amp; Reconstruction</b><span class="sub">← Urology</span></td>
+<td>Urology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6.5</td>
+<td>US</td>
+<td><b>77.9</b></td>
+</tr><tr data-row data-group="Urology subs" data-search="robotic urologic surgery urology urology subs" data-fit="78.7" data-ai="4">
+<td><b>Robotic Urologic Surgery</b><span class="sub">← Urology</span></td>
+<td>Urology subs</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>7</td>
+<td>US</td>
+<td><b>78.7</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="clinical informatics (board subspecialty) internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="79.0" data-ai="4">
+<td><b>Clinical Informatics (Board Subspecialty)</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>6</td>
+<td>US</td>
+<td><b>79.0</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="quality &amp; patient safety internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4.5">
+<td><b>Quality &amp; Patient Safety</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="simulation &amp; medical education internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4">
+<td><b>Simulation &amp; Medical Education</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="physician executive / medical administration internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="77.2" data-ai="4">
+<td><b>Physician Executive / Medical Administration</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4.5</td>
+<td>Gulf</td>
+<td><b>77.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="medico-legal &amp; expert consulting internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4">
+<td><b>Medico-Legal &amp; Expert Consulting</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4</td>
+<td>US</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="pharmaceutical medicine / clinical development internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="79.2" data-ai="4">
+<td><b>Pharmaceutical Medicine / Clinical Development</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>CH</td>
+<td><b>79.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="health-tech &amp; medical ai (physician-entrepreneur) internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="82.5" data-ai="3.5">
+<td><b>Health-Tech &amp; Medical AI (Physician-Entrepreneur)</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>5.5</td>
+<td>US</td>
+<td><b>82.5</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="md-mba / healthcare finance internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="77.2" data-ai="4">
+<td><b>MD-MBA / Healthcare Finance</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>US</td>
+<td><b>77.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="global health leadership internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4.5">
+<td><b>Global Health Leadership</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>4.5</td>
+<td>Global</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="refugee &amp; migrant health internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4.5">
+<td><b>Refugee &amp; Migrant Health</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>4</td>
+<td>Global</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="tropical medicine &amp; international health internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4">
+<td><b>Tropical Medicine &amp; International Health</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4.5</td>
+<td>UK</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="prison / correctional medicine internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4.5">
+<td><b>Prison / Correctional Medicine</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>3.5</td>
+<td>US</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="street medicine / homeless health internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4.5">
+<td><b>Street Medicine / Homeless Health</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>3.5</td>
+<td>US</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="concierge / executive medicine internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="75.2" data-ai="4">
+<td><b>Concierge / Executive Medicine</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>Gulf</td>
+<td><b>75.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="longevity &amp; preventive health (emerging) internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="75.0" data-ai="5">
+<td><b>Longevity &amp; Preventive Health (Emerging)</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>5</td>
+<td>5</td>
+<td>Gulf</td>
+<td><b>75.0</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="psychedelic-assisted therapy (emerging) psychiatry cross-cutting &amp; career tracks" data-fit="74.4" data-ai="4">
+<td><b>Psychedelic-Assisted Therapy (Emerging)</b><span class="sub">← Psychiatry</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>5</td>
+<td>DE</td>
+<td><b>74.4</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="medical cannabis medicine (emerging) internal medicine (gateway) cross-cutting &amp; career tracks" data-fit="73.2" data-ai="4.5">
+<td><b>Medical Cannabis Medicine (Emerging)</b><span class="sub">← Internal Medicine (gateway)</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>4</td>
+<td>DE</td>
+<td><b>73.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="space medicine public health &amp; preventive medicine cross-cutting &amp; career tracks" data-fit="76.2" data-ai="3.5">
+<td><b>Space Medicine</b><span class="sub">← Public Health &amp; Preventive Medicine</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>76.2</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="military &amp; defense medicine emergency medicine cross-cutting &amp; career tracks" data-fit="76.4" data-ai="4">
+<td><b>Military &amp; Defense Medicine</b><span class="sub">← Emergency Medicine</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>76.4</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="travel medicine family medicine cross-cutting &amp; career tracks" data-fit="72.8" data-ai="4.5">
+<td><b>Travel Medicine</b><span class="sub">← Family Medicine</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4.5</td>
+<td>4</td>
+<td>UK</td>
+<td><b>72.8</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="wound care &amp; limb preservation vascular surgery cross-cutting &amp; career tracks" data-fit="73.9" data-ai="4">
+<td><b>Wound Care &amp; Limb Preservation</b><span class="sub">← Vascular Surgery</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#3f8f29"></span>4</td>
+<td>4.5</td>
+<td>US</td>
+<td><b>73.9</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="hair restoration surgery dermatology cross-cutting &amp; career tracks" data-fit="73.8" data-ai="3.5">
+<td><b>Hair Restoration Surgery</b><span class="sub">← Dermatology</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>5</td>
+<td>UAE</td>
+<td><b>73.8</b></td>
+</tr><tr data-row data-group="Cross-cutting &amp; career tracks" data-search="aesthetic / medical-spa medicine dermatology cross-cutting &amp; career tracks" data-fit="73.8" data-ai="3.5">
+<td><b>Aesthetic / Medical-Spa Medicine</b><span class="sub">← Dermatology</span></td>
+<td>Cross-cutting &amp; career tracks</td>
+<td><span class="dot" style="background:#0f8b8d"></span>3.5</td>
+<td>5.5</td>
+<td>UAE</td>
+<td><b>73.8</b></td>
+</tr></tbody>
+    </table></div>
+    <p class="small-note" style="margin-top:18px">Fit is inherited from the parent specialty's rubric score with trait adjustments where the fellowship materially changes the profile (e.g., lifestyle or income). See <a href="method.html">Method</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="ekg-mini"><svg data-ekg viewBox="0 0 1200 120" width="100%" height="120" preserveAspectRatio="none" aria-hidden="true"><path class="base" d=""/><path class="beam" d=""/></svg></div>
+  <div class="foot-in">
+    <div>
+      <div class="foot-brand">The Specialty <em>Atlas</em></div>
+      <p style="margin-top:10px">Educational planning guide only — not career advice from a licensed counsellor, and not financial advice. Numbers change yearly; always verify against the source bodies (NRMP, CaRMS, SCFHS, GMC, NHS Employers, your national medical council) before committing. Visa rules for foreign citizens are subject to change.</p>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <a href="index.html">Atlas</a><a href="specialties.html">Specialties</a><a href="countries.html">Countries</a><a href="routes.html">Routes</a><a href="catalog.html">Catalog</a><a href="ai.html">AI Era</a><a href="method.html">Method</a>
+    </div>
+    <div>
+      <h4>Pulse</h4>
+      <span id="pulse-views" class="small-note" style="display:none;color:#8b96a5"></span>
+      <div id="pulse-slot" style="display:none">
+        <button class="pulse-btn" data-val="up">▲ Useful</button>
+        <button class="pulse-btn" data-val="down">▼ Needs work</button>
+        <span class="pulse-thanks">Recorded — thank you.</span>
+      </div>
+      <p style="margin-top:10px">A static site with a heartbeat: page pulse runs on Appwrite when connected.</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>v1.0 — compiled August 2026 · built from NRMP 2025 · CaRMS 2025 · NHS 2025/26 · TV-Ärzte 2026 · AMC · MCNZ · RACS</span>
+    <span>Built for internationally trained doctors 🌍</span>
+  </div>
+</footer>
+<button id="top-btn" aria-label="Back to top">↑</button>
+<script>
+/* THE SPECIALTY ATLAS — main interactions (no frameworks, no build step) */
+(function () {
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- reading progress ---------- */
+  var prog = document.getElementById("progress");
+  function onScroll() {
+    if (prog) {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      prog.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+    }
+    var tb = document.getElementById("top-btn");
+    if (tb) tb.classList.toggle("show", window.scrollY > 700);
+    spy();
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---------- mobile nav ---------- */
+  var burger = document.querySelector(".nav-burger");
+  var links = document.querySelector(".nav-links");
+  if (burger && links) {
+    burger.addEventListener("click", function () {
+      links.classList.toggle("open");
+      burger.setAttribute("aria-expanded", links.classList.contains("open"));
+    });
+  }
+
+  /* ---------- back to top ---------- */
+  var topBtn = document.getElementById("top-btn");
+  if (topBtn) topBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+  });
+
+  /* ---------- reveal on scroll ---------- */
+  var rvs = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window && !reduced) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+          // trigger bars inside
+          en.target.querySelectorAll(".bar i[data-w], .wbar i[data-w]").forEach(function (b) {
+            b.style.width = b.getAttribute("data-w") + "%";
+          });
+          // trigger counters
+          en.target.querySelectorAll(".count[data-n]").forEach(countUp);
+          if (en.target.classList && en.target.classList.contains("count")) countUp(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    rvs.forEach(function (el) { io.observe(el); });
+  } else {
+    rvs.forEach(function (el) { el.classList.add("in"); });
+    document.querySelectorAll(".bar i[data-w], .wbar i[data-w]").forEach(function (b) {
+      b.style.width = b.getAttribute("data-w") + "%";
+    });
+    document.querySelectorAll(".count[data-n]").forEach(function (el) {
+      el.textContent = (+el.getAttribute("data-n")).toLocaleString("en-US");
+    });
+  }
+
+  /* ---------- animated counters ---------- */
+  function countUp(el) {
+    if (el._done) return;
+    el._done = true;
+    var target = parseFloat(el.getAttribute("data-n"));
+    var suf = el.getAttribute("data-suf") || "";
+    var dur = reduced ? 0 : 1300;
+    var t0 = null;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = dur === 0 ? 1 : Math.min(1, (ts - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = target * eased;
+      el.textContent = (target % 1 === 0 ? Math.round(val).toLocaleString("en-US") : val.toFixed(1)) + suf;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- scroll spy ---------- */
+  var spySections = Array.prototype.slice.call(document.querySelectorAll("[data-spy]"));
+  function spy() {
+    if (!spySections.length) return;
+    var pos = window.scrollY + 140, current = null;
+    spySections.forEach(function (s) {
+      if (s.offsetTop <= pos) current = s.id;
+    });
+    document.querySelectorAll(".nav-links a[data-spylink]").forEach(function (a) {
+      a.classList.toggle("on-spy", a.getAttribute("data-spylink") === current);
+    });
+  }
+
+  /* ---------- top-10 expand ---------- */
+  document.querySelectorAll(".rank .more").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var r = btn.closest(".rank");
+      r.classList.toggle("open");
+      btn.childNodes[0].textContent = r.classList.contains("open") ? "Hide the reasoning " : "Why this ranks here ";
+    });
+  });
+
+  /* ---------- specialty + catalog filters ---------- */
+  var q = document.getElementById("q");
+  if (q) {
+    var grp = document.getElementById("grp");
+    var sortSel = document.getElementById("sort");
+    var counter = document.getElementById("count-lab");
+    var cards = Array.prototype.slice.call(document.querySelectorAll("[data-card]"));
+    var rows = Array.prototype.slice.call(document.querySelectorAll("[data-row]"));
+
+    function apply() {
+      var term = (q.value || "").toLowerCase().trim();
+      var g = grp ? grp.value : "";
+      var shown = 0;
+      cards.forEach(function (c) {
+        var okG = !g || c.getAttribute("data-group") === g;
+        var okQ = !term || c.getAttribute("data-search").indexOf(term) !== -1;
+        var vis = okG && okQ;
+        c.style.display = vis ? "" : "none";
+        if (vis) shown++;
+      });
+      rows.forEach(function (r) {
+        var okG = !g || r.getAttribute("data-group") === g;
+        var okQ = !term || r.getAttribute("data-search").indexOf(term) !== -1;
+        var vis = okG && okQ;
+        r.style.display = vis ? "" : "none";
+        if (vis) shown++;
+      });
+      // hide empty group headers
+      document.querySelectorAll(".grp-head[data-grouphead]").forEach(function (h) {
+        var name = h.getAttribute("data-grouphead");
+        var any = cards.some(function (c) {
+          return c.getAttribute("data-group") === name && c.style.display !== "none";
+        });
+        h.style.display = any ? "" : "none";
+      });
+      if (counter) counter.textContent = shown + " shown";
+    }
+
+    function applySort() {
+      if (!sortSel) return;
+      var key = sortSel.value;
+      if (!key) return;
+      var byCat = cards.length ? cards : rows;
+      var parent = byCat[0] ? byCat[0].parentNode : null;
+      if (!parent) return;
+      var sorted = byCat.slice().sort(function (a, b) {
+        var va = parseFloat(a.getAttribute("data-" + key)) || 0;
+        var vb = parseFloat(b.getAttribute("data-" + key)) || 0;
+        return vb - va;
+      });
+      // re-append preserving headers: simple approach — append at end of parent
+      sorted.forEach(function (el) { parent.appendChild(el); });
+    }
+
+    q.addEventListener("input", apply);
+    if (grp) grp.addEventListener("change", apply);
+    if (sortSel) sortSel.addEventListener("change", function () { applySort(); apply(); });
+    apply();
+  }
+
+  /* ---------- EKG generator (renders beat pattern into any .ekg svg) ---------- */
+  document.querySelectorAll("svg[data-ekg]").forEach(function (svg) {
+    var beat =
+      "h52 c5,-9 11,-9 16,0 h22 l5,9 l7,-52 l8,66 l6,-23 h20 c9,-17 21,-17 30,0 h62";
+    var d = "M0,60 ";
+    for (var i = 0; i < 5; i++) d += beat + " ";
+    var paths = svg.querySelectorAll("path");
+    paths.forEach(function (p) { p.setAttribute("d", d); });
+  });
+
+  onScroll();
+})();
+
+</script>
+<script>
+/* ============================================================
+   PULSE CONFIG — Appwrite backend connection
+   ------------------------------------------------------------
+   Fill these three values after creating your Appwrite project
+   (see appwrite/README.md for the 10-minute setup).
+   Until then the widget stays hidden and the site works 100%
+   as a static site. Zero breakage.
+   ============================================================ */
+window.PULSE_CONFIG = {
+  endpoint: "https://cloud.appwrite.io/v1",   // or your self-hosted URL
+  projectId: "",        // e.g. "665f1a...e2"
+  functionId: "pulse",  // keep "pulse" unless you renamed the function
+};
+
+</script>
+<script>
+/* ============================================================
+   PULSE — the site's heartbeat (Appwrite-backed)
+   Sends anonymous page_view events and wires the "Was this
+   page useful?" feedback widget to an Appwrite Function.
+   Degrades gracefully: if not configured or offline, it is
+   completely silent.
+   ============================================================ */
+(function () {
+  "use strict";
+  var cfg = window.PULSE_CONFIG || {};
+  if (!cfg.projectId || !cfg.functionId) return; // not configured → static mode
+
+  var path = location.pathname.replace(/index\.html$/, "/");
+
+  function call(body) {
+    return fetch(cfg.endpoint + "/functions/" + cfg.functionId + "/executions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Appwrite-Project": cfg.projectId,
+      },
+      body: JSON.stringify(body),
+    }).then(function (r) { return r.ok ? r.json() : null; });
+  }
+
+  /* ---- fire the page_view beacon (fire-and-forget) ---- */
+  call({ type: "page_view", path: path }).then(function (res) {
+    try {
+      var data = JSON.parse(res.responseBody || "{}");
+      var el = document.getElementById("pulse-views");
+      if (el && data.views != null) {
+        el.textContent = "● " + Number(data.views).toLocaleString("en-US") + " views on this page";
+        el.style.display = "inline-block";
+      }
+    } catch (e) { /* silent */ }
+  }).catch(function () { /* offline / blocked — silent */ });
+
+  /* ---- feedback widget ---- */
+  var slot = document.getElementById("pulse-slot");
+  if (!slot) return;
+  slot.style.display = "flex";
+
+  slot.querySelectorAll(".pulse-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var val = btn.getAttribute("data-val");
+      btn.disabled = true;
+      call({ type: "feedback", path: path, value: val })
+        .then(function () {
+          slot.querySelectorAll(".pulse-btn").forEach(function (b) { b.style.display = "none"; });
+          var thanks = slot.querySelector(".pulse-thanks");
+          if (thanks) { thanks.style.display = "inline"; }
+        })
+        .catch(function () { btn.disabled = false; });
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
