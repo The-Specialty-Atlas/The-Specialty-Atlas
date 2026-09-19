@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://the-specialty-atlas.github.io/specialty-atlas/sitemap.xml
