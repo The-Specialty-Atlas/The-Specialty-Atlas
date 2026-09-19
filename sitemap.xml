@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://YOUR-USERNAME.github.io/specialty-atlas/index.html</loc><priority>1.0</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/specialty-atlas/specialties.html</loc><priority>0.8</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/specialty-atlas/countries.html</loc><priority>0.8</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/specialty-atlas/routes.html</loc><priority>0.8</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/specialty-atlas/catalog.html</loc><priority>0.8</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/specialty-atlas/ai.html</loc><priority>0.8</priority></url>
-  <url><loc>https://YOUR-USERNAME.github.io/specialty-atlas/method.html</loc><priority>0.8</priority></url>
+  <url><loc>https://the-specialty-atlas.github.io/specialty-atlas/index.html</loc><priority>1.0</priority></url>
+  <url><loc>https://the-specialty-atlas.github.io/specialty-atlas/specialties.html</loc><priority>0.8</priority></url>
+  <url><loc>https://the-specialty-atlas.github.io/specialty-atlas/countries.html</loc><priority>0.8</priority></url>
+  <url><loc>https://the-specialty-atlas.github.io/specialty-atlas/routes.html</loc><priority>0.8</priority></url>
+  <url><loc>https://the-specialty-atlas.github.io/specialty-atlas/catalog.html</loc><priority>0.8</priority></url>
+  <url><loc>https://the-specialty-atlas.github.io/specialty-atlas/ai.html</loc><priority>0.8</priority></url>
+  <url><loc>https://the-specialty-atlas.github.io/specialty-atlas/method.html</loc><priority>0.8</priority></url>
 </urlset>
